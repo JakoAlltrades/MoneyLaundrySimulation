@@ -1,4 +1,9 @@
 
 public class CarWashDriver {
-//fuck you john
+	//fuck you john
+	
+	public static void main(String[] args)
+	{
+		
+	}
 }
