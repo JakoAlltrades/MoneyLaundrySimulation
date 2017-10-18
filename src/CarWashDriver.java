@@ -4,7 +4,10 @@ import java.util.concurrent.Semaphore;
 
 public class CarWashDriver {
 
+
 	//fuck you john 
+	// and Brandon
+	//Also matt
 	//fight me brandon
 	
 	public static long dayLength = 8000;
@@ -22,7 +25,7 @@ public class CarWashDriver {
 	 * I am not sure what kind of Executor service we should use, 
 	 * I think timeThreadService might work best if we use that for customer arrival 
 	 */
-	
+
 	public static void main(String[] args)
 	{
 		
