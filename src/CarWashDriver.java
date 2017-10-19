@@ -66,7 +66,8 @@ public class CarWashDriver extends Thread{
 						System.out.println(e.toString());
 					}
 					try {
-						System.out.println("Car that was washed has payed for their service.");
+						int payTime = (gen.nextInt(2)+1);
+						System.out.println("Car that was washed has payed for their service. Time taken: "+payTime);
 					}
 					finally {
 						Register.release();
