@@ -1,9 +1,10 @@
+
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 
-public class CarWashDriver {
+public class CarWashDriver extends Thread{
 
 
 	//fuck you john 
@@ -12,16 +13,18 @@ public class CarWashDriver {
 	//fight me brandon
 	//int average = (-1) * math.log(1 - gen.nextDouble()) * averageCarWashPerHour;
 	
-	public static long dayLength = 8000;
-	public static int maxWashTime = 400;
-	public static long minWashTime = 200;
-	public final int washingMachineCount = 4;
-	public final int averageCarsWashedPerHour = 19;
+	public static long dayLength = 720;
+	public static int maxWashTime = 10;
+	public static long minWashTime = 5;
+	public final int washLinesCount = 1;
+	public int timeTillNewArrivals = 10;
+	public int mostArrivals = 3;
+
 	
-	public long timePassed = 0;//Use this instead of putting threads to sleep
+	public static long timePassed = 0;//Use this instead of putting threads to sleep
+	//-Ln(1-.78)(20) =
+	Semaphore washingLines = new Semaphore(washLinesCount);//if we want to have only one person pay at a time
 	
-	public static Object Registar = new Object();//if we want to have only one person pay at a time
-	Semaphore washingMachines = new Semaphore(washingMachineCount);
 	
 	static Math math;
 	public static Random gen = new Random();
@@ -33,7 +36,14 @@ public class CarWashDriver {
 	
 	public static void main(String[] args)
 	{
-		
+
+		while(timePassed < dayLength)
+		{//while day is not over 
+			
+		}
+
+		//math.log(1 - );
+
 	}
 
 }
