@@ -18,6 +18,9 @@ public class CarWashDriver extends Thread{
 	public final static int washLinesCount = 1;
 	public static int timeTillNewArrivals = 10;
 	public static int mostArrivals = 3;
+	public static int amount_of_registers = 1;
+	
+	static Semaphore Register = new Semaphore(amount_of_registers);
 
 	
 	//Use this instead of putting threads to sleep
