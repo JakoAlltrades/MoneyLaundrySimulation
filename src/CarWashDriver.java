@@ -10,6 +10,7 @@ public class CarWashDriver {
 	// and Brandon
 	//Also matt
 	//fight me brandon
+	//int average = (-1) * math.log(1 - gen.nextDouble()) * averageCarWashPerHour;
 	
 	public static long dayLength = 8000;
 	public static int maxWashTime = 400;
@@ -23,16 +24,16 @@ public class CarWashDriver {
 	Semaphore washingMachines = new Semaphore(washingMachineCount);
 	
 	static Math math;
-	public static Random random = new Random();
+	public static Random gen = new Random();
 	
 	/*
 	 * I am not sure what kind of Executor service we should use, 
 	 * I think timeThreadService might work best if we use that for customer arrival 
 	 */
-
+	
 	public static void main(String[] args)
 	{
-		math.log(1 - )
+		
 	}
 
 }
