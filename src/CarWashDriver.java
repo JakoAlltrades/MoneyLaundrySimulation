@@ -56,7 +56,7 @@ public class CarWashDriver extends Thread{
 				try
 				{
 					int washTime = (gen.nextInt(maxWashTime)+minWashTime);
-					System.out.println("Car was washed for: " + washTime + "Minutes by lane: "+ Thread.currentThread().getId());
+					System.out.println("Car was washed for: " + washTime + " Minutes by lane: "+ Thread.currentThread().getId());
 					timePassed+=washTime;
 					try {
 						Register.acquire();
