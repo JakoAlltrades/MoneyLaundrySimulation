@@ -52,7 +52,8 @@ public class CarWashDriver extends Thread{
 				}
 				try
 				{
-					
+					int washTime = (gen.nextInt(maxWashTime)+minWashTime);
+					timePassed+=washTime;
 				}finally 
 				{
 					washingLines.release();
