@@ -7,10 +7,11 @@ import java.util.concurrent.Semaphore;
 public class CarWashDriver extends Thread{
 
 
-	//fuck you john 
-	// and Brandon
-	//Also matt
-	//fight me brandon
+	//Truck You John; 
+	//Brandon,
+	//Matt,
+	//and Chance
+	//fight me Brandon
 	
 	public static long dayLength = 720;
 	public static int maxWashTime = 10;
