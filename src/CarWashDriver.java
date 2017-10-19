@@ -15,7 +15,7 @@ public class CarWashDriver extends Thread{
 	public static int dayLength = 720;
 	public static int maxWashTime = 10;
 	public static int minWashTime = 5;
-	public final int washLinesCount = 1;
+	public final static int washLinesCount = 1;
 	public static int timeTillNewArrivals = 10;
 	public static int mostArrivals = 3;
 
@@ -45,6 +45,7 @@ public class CarWashDriver extends Thread{
 			svc.submit(() ->{
 				try {
 					washingLines.acquire();
+					
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					throw new RuntimeException();
