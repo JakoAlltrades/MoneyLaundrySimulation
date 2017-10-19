@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 
+=======
+import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+>>>>>>> origin/master
 import java.util.concurrent.Semaphore;
 
 public class CarWashDriver extends Thread{
@@ -22,6 +28,9 @@ public class CarWashDriver extends Thread{
 	Semaphore washingLines = new Semaphore(washLinesCount);//if we want to have only one person pay at a time
 	
 	
+	static Math math;
+	public static Random random = new Random();
+	
 	/*
 	 * I am not sure what kind of Executor service we should use, 
 	 * I think timeThreadService might work best if we use that for customer arrival 
@@ -29,10 +38,14 @@ public class CarWashDriver extends Thread{
 
 	public static void main(String[] args)
 	{
+<<<<<<< HEAD
 		while(timePassed < dayLength)
 		{//while day is not over 
 			
 		}
+=======
+		math.log(1 - )
+>>>>>>> origin/master
 	}
 
 }
