@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
@@ -21,6 +22,9 @@ public class CarWashDriver {
 	public static Object Registar = new Object();//if we want to have only one person pay at a time
 	Semaphore washingMachines = new Semaphore(washingMachineCount);
 	
+	static Math math;
+	public static Random random = new Random();
+	
 	/*
 	 * I am not sure what kind of Executor service we should use, 
 	 * I think timeThreadService might work best if we use that for customer arrival 
@@ -28,7 +32,7 @@ public class CarWashDriver {
 
 	public static void main(String[] args)
 	{
-		
+		math.log(1 - )
 	}
 
 }
