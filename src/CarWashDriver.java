@@ -50,6 +50,13 @@ public class CarWashDriver extends Thread{
 					// TODO Auto-generated catch block
 					throw new RuntimeException();
 				}
+				try
+				{
+					
+				}finally 
+				{
+					washingLines.release();
+				}
 			});
 			timePassed += average;
 			
