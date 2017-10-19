@@ -19,7 +19,7 @@ public class CarWashDriver extends Thread{
 	public static int timeTillNewArrivals = 10;
 	public static int mostArrivals = 3;
 	public static int amount_of_registers = 1;
-	
+	public static int totalCarsSeen = 0;
 	static Semaphore Register = new Semaphore(amount_of_registers);
 
 	
@@ -40,13 +40,16 @@ public class CarWashDriver extends Thread{
 	public static void main(String[] args)
 	{
 
-		while(timePassed < dayLength)
+		while(timePassed <= dayLength)
 		{//while day is not over 
 			double average = ((-1) * math.log(1 - gen.nextDouble()) * timeTillNewArrivals);
 			int peopleArrived = (gen.nextInt(mostArrivals)+1);
 			svc = Executors.newFixedThreadPool(peopleArrived);
+			timePassed += average;
+			if(timePassed <= dayLength) {
 			svc.submit(() ->{
 				try {
+					totalCarsSeen++;
 					washingLines.acquire();
 					
 				} catch (InterruptedException e) {
@@ -56,8 +59,8 @@ public class CarWashDriver extends Thread{
 				try
 				{
 					int washTime = (gen.nextInt(maxWashTime)+minWashTime);
-					System.out.println("Car was washed for: " + washTime + " Minutes by lane: "+ Thread.currentThread().getId());
-					timePassed+=washTime;
+					System.out.println("Car was washed for: " + washTime + " Minutes, Customer Id: "+ Thread.currentThread().getId());
+					timePassed +=washTime;
 					try {
 						Register.acquire();
 					}
@@ -68,6 +71,7 @@ public class CarWashDriver extends Thread{
 					try {
 						int payTime = (gen.nextInt(2)+1);
 						System.out.println("Car that was washed has payed for their service. Time taken: "+payTime);
+						timePassed+=payTime;
 					}
 					finally {
 						Register.release();
@@ -77,9 +81,11 @@ public class CarWashDriver extends Thread{
 					washingLines.release();
 				}
 			});
-			timePassed += average;
 			
+			svc.shutdown();
+			}
 		}
+		System.out.println("Total amount of cars seen: "+ totalCarsSeen + ". The total time spent working was " + Math.floor(timePassed) + " Minutes");
 
 		//math.log(1 - );
 
