@@ -1,10 +1,7 @@
-<<<<<<< HEAD
 
-=======
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
->>>>>>> origin/master
 import java.util.concurrent.Semaphore;
 
 public class CarWashDriver extends Thread{
@@ -38,14 +35,13 @@ public class CarWashDriver extends Thread{
 
 	public static void main(String[] args)
 	{
-<<<<<<< HEAD
+
 		while(timePassed < dayLength)
 		{//while day is not over 
 			
 		}
-=======
-		math.log(1 - )
->>>>>>> origin/master
+
+		//math.log(1 - );
 	}
 
 }
