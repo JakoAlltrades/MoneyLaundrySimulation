@@ -32,7 +32,7 @@ public class CarWashDriver extends Thread{
 		while(timePassed <= dayLength)
 		{//while day is not over 
 			double average = (((-1) * math.log(1 - gen.nextDouble())) * timeTillNewArrivals);
-			System.out.println("Average arrival: "+ math.ceil(average));
+			//System.out.println("Average arrival: "+ math.ceil(average));
 			int peopleArrived = (gen.nextInt(mostArrivals)+1);
 			svc = Executors.newFixedThreadPool(peopleArrived);
 			timePassed += average;
