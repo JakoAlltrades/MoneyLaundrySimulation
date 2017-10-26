@@ -8,7 +8,7 @@ public class CarWashDriver extends Thread{
 	//int average = (-1) * math.log(1 - gen.nextDouble()) * averageCarWashPerHour;
 	public static double timePassed = 0;
 	public static int dayLength = 720;
-	public static int averageWashTime = 12;
+	public static int averageWashTime = 5;
 	public final static int washLinesCount = 1;
 	public static int timeTillNewArrivals = 10;
 	public static int mostArrivals = 3;
