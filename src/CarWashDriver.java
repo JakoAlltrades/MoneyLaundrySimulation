@@ -19,6 +19,8 @@ public class CarWashDriver extends Thread{
 	static Semaphore washingLines = new Semaphore(washLinesCount);//if we want to have only one person pay at a time
 	static Math math;
 	public static Random gen = new Random();
+	public static int numAdded = 0;
+	public static double overall = 0;
 	static ExecutorService svc;
 	
 	/*
@@ -36,6 +38,8 @@ public class CarWashDriver extends Thread{
 			int peopleArrived = (gen.nextInt(mostArrivals)+1);
 			svc = Executors.newFixedThreadPool(peopleArrived);
 			timePassed += average;
+			overall +=average;
+			numAdded++;
 			if(timePassed <= dayLength) {
 			svc.submit(() ->{
 				try {
@@ -76,7 +80,7 @@ public class CarWashDriver extends Thread{
 			}
 		}
 		System.out.println("Total amount of cars seen: "+ totalCarsSeen + ". The total time spent working was " + Math.floor(timePassed) + " Minutes");
-
+		System.out.println("The average time to be seen is: " + (overall/numAdded));
 		//math.log(1 - );
 
 	}
