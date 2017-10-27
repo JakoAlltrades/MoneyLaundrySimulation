@@ -1,4 +1,5 @@
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -7,19 +8,18 @@ import java.util.concurrent.Semaphore;
 public class CarWashDriver extends Thread{
 	//int average = (-1) * math.log(1 - gen.nextDouble()) * averageCarWashPerHour;
 	public static double timePassed = 0;
-	public static int dayLength = 720;
-	public static int averageWashTime = 12;
+	public static int dayLength = 720;//9 hour work day or(60 *9)
+	public static int averageWashTime = 10;//Was originally 12 (minutes)
 	public final static int washLinesCount = 1;
-	public static int timeTillNewArrivals = 10;
+	public static int timeTillNewArrivals = 15;//Was originally 10 minutes
+	//Those averages produced an hour wait time before service which is impossible for a business to catch up to
+	//With the new averages the average wait time is about 20 minutes
 	public static int mostArrivals = 3;
-	public static int amount_of_registers = 1;
-	public static int totalCarsSeen = 0;
-	public static double averagePayTime = 1.5;
-	static Semaphore Register = new Semaphore(amount_of_registers);
 	static Semaphore washingLines = new Semaphore(washLinesCount);//if we want to have only one person pay at a time
 	static Math math;
 	public static Random gen = new Random();
 	static ExecutorService svc;
+	public static ArrayList<Double> waitTimes = new ArrayList<Double>();
 	
 	/*
 	 * I am not sure what kind of Executor service we should use, 
@@ -31,15 +31,15 @@ public class CarWashDriver extends Thread{
 
 		while(timePassed <= dayLength)
 		{//while day is not over 
-			double average = (((-1) * math.log(1 - gen.nextDouble())) * timeTillNewArrivals);
 			//System.out.println("Average arrival: "+ math.ceil(average));
 			int peopleArrived = (gen.nextInt(mostArrivals)+1);
 			svc = Executors.newFixedThreadPool(peopleArrived);
-			timePassed += average;
-			if(timePassed <= dayLength) {
+			while(peopleArrived > 0)
+			{
+				double average = (((-1) * math.log(1 - gen.nextDouble())) * timeTillNewArrivals);
+				double washTime = ((-1) * math.log(1 - gen.nextDouble()) * averageWashTime);
 			svc.submit(() ->{
 				try {
-					totalCarsSeen++;
 					washingLines.acquire();
 					
 				} catch (InterruptedException e) {
@@ -48,9 +48,12 @@ public class CarWashDriver extends Thread{
 				}
 				try
 				{
-					double washTime = ((-1) * math.log(1 - gen.nextDouble()) * averageWashTime);
-					System.out.println("Car was washed for: " + math.ceil(washTime) + " Minutes, Customer Id: "+ Thread.currentThread().getId());
-					timePassed +=math.ceil(washTime);
+					if(timePassed <= dayLength) {
+					System.out.println("Car was washed for: " + math.ceil(washTime) + " Minutes and Waited for: " + math.ceil(average) +" Minutes, Customer Id: "+ Thread.currentThread().getId());
+					timePassed +=math.ceil(washTime) + average;//I moved the timePassed change to right after the service is completed
+					//I think this makes sense more logically since it only increment the clock if both the person had waited and then made it to were the service
+					waitTimes.add(average);
+					}
 					/*try {
 						Register.acquire();
 					}
@@ -71,11 +74,20 @@ public class CarWashDriver extends Thread{
 					washingLines.release();
 				}
 			});
-			
-			svc.shutdown();
+			peopleArrived--;
+			//svc.shutdown();
 			}
 		}
-		System.out.println("Total amount of cars seen: "+ totalCarsSeen + ". The total time spent working was " + Math.floor(timePassed) + " Minutes");
+			
+		System.out.println("Total amount of cars seen: "+ waitTimes.size() + ". The total time spent working was " + Math.floor(timePassed) + " Minutes");
+		double totalWaitTime= 0, averageWaitTime;
+		for(int j = 0; j < waitTimes.size(); j++)
+		{
+			totalWaitTime += waitTimes.get(j);
+		}
+		averageWaitTime = totalWaitTime / waitTimes.size();
+		System.out.println("The average wait time is [" + math.ceil(totalWaitTime) +"] / [" + waitTimes.size() + "] = ["+ math.ceil(averageWaitTime) +"] minutes");
+		
 
 		//math.log(1 - );
 
