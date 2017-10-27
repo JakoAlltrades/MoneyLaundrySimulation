@@ -77,8 +77,7 @@ public class CarWashDriver extends Thread{
 			peopleArrived--;
 			//svc.shutdown();
 			}
-		}
-			
+		}	
 		System.out.println("Total amount of cars seen: "+ waitTimes.size() + ". The total time spent working was " + Math.floor(timePassed) + " Minutes");
 		double totalWaitTime= 0, averageWaitTime;
 		for(int j = 0; j < waitTimes.size(); j++)
@@ -87,9 +86,6 @@ public class CarWashDriver extends Thread{
 		}
 		averageWaitTime = totalWaitTime / waitTimes.size();
 		System.out.println("The average wait time is [" + math.ceil(totalWaitTime) +"] / [" + waitTimes.size() + "] = ["+ math.ceil(averageWaitTime) +"] minutes");
-		
-
-		//math.log(1 - );
 
 	}
 
